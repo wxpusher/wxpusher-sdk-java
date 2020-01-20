@@ -1,0 +1,3 @@
+rootProject.name = 'wxpusher-sdk-java'
+include ":demo"
+include ":sdk"
