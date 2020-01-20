@@ -1,6 +1,7 @@
 package com.zjiecode.wxpusher.client;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zjiecode.wxpusher.client.bean.Message;
 import com.zjiecode.wxpusher.client.bean.Page;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.WxUser;
@@ -17,7 +18,7 @@ public class ClientTest {
 
     @Test
     public void testQuery() {
-        Result<Page<WxUser>> users = WxPusher.queryWxUser("AT_9YD7ptRUmeXoG1ad2BIuXzF33zAzWzY9", "UID_rKGlpjR8gKynpjxBvWXDrg1pdZih");
+        Result<Page<WxUser>> users = WxPusher.queryWxUser("AT_xxxxx", "UID_xxxxx");
         System.out.println(JSONObject.toJSONString(users));
     }
 }
