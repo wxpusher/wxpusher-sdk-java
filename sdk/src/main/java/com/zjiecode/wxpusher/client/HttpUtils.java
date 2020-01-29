@@ -41,8 +41,8 @@ public final class HttpUtils {
 
             URL cUrl = new URL(buildUrl(path));
             HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
-            urlConnection.setConnectTimeout(5000);
-            urlConnection.setReadTimeout(5000);
+            urlConnection.setConnectTimeout(60000);
+            urlConnection.setReadTimeout(60000);
             urlConnection.setUseCaches(false);
             urlConnection.setRequestMethod("POST");
             //设置请求属性
@@ -79,8 +79,8 @@ public final class HttpUtils {
             }
             URL cUrl = new URL(url);
             HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
-            urlConnection.setConnectTimeout(5000);
-            urlConnection.setReadTimeout(5000);
+            urlConnection.setConnectTimeout(60000);
+            urlConnection.setReadTimeout(60000);
             urlConnection.setUseCaches(false);
             urlConnection.setRequestMethod("GET");
             //设置请求属性

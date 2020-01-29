@@ -12,7 +12,7 @@
 如果不存在你需要语言的sdk，请你按照[参考文档](http://wxpusher.zjiecode.com/docs)直接使用http调用，另外，欢迎你贡献更多语言的SDK。
 # Java版本SDK
 
-[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.2&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-java-sdk)
+[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.3&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-java-sdk)
 ## 目录模块说明
 - demo
 
@@ -27,7 +27,7 @@
 ```groovy
 dependencies {
     ......
-    compile 'com.zjiecode:wxpusher-java-sdk:2.1.2'//使用上面的版本号
+    compile 'com.zjiecode:wxpusher-java-sdk:2.1.3'//使用上面的版本号
     ......
 }
 ```
