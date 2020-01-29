@@ -31,12 +31,12 @@ public class CallBackController {
 
     @PostMapping("/callback")
     public String callback(@RequestBody BaseCallBackReq callBackReq) {
-        log.info("收到wxpusher回调:{}", callBackReq);
+        log.info("收到wxpusher回调:{}", JSONObject.toJSONString(callBackReq));
         if (BaseCallBackReq.ACTION_APP_SUBSCRIBE.equalsIgnoreCase(callBackReq.getAction())) {
             AppSubscribeBean appSubscribeBean = JSONObject.parseObject(JSONObject.toJSONString(callBackReq.getData()), AppSubscribeBean.class);
             if (!StringUtils.isEmpty(appSubscribeBean.getExtra())) {
                 DataRepo.put(appSubscribeBean.getExtra(), appSubscribeBean.getUid());
-                log.info("存储回调数据:{}", appSubscribeBean);
+                log.info("存储回调数据:{}", JSONObject.toJSONString(appSubscribeBean));
                 //扫码以后，发送一条消息给用户
                 Message message = new Message();
                 message.setContent("扫描成功，你可以使用demo演示程序发送消息");
