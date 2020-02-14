@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 
@@ -51,7 +52,7 @@ public final class HttpUtils {
             urlConnection.setDoOutput(true);
             urlConnection.connect();
             OutputStream outputStream = urlConnection.getOutputStream();
-            outputStream.write(dataStr.getBytes());
+            outputStream.write(dataStr.getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
             return dealConnect(urlConnection);
         } catch (MalformedURLException e) {
@@ -175,7 +176,7 @@ public final class HttpUtils {
             while ((len = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, len);
             }
-            return new String(outputStream.toByteArray());
+            return new String(outputStream.toByteArray(),"utf-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
