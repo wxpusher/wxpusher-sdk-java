@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta name="keywords" content="微信推送,推送服务,WxPusher,消息提醒,免费推送">
   <meta name="description" content="微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息。">
   <title>WxPusher-消息推送服务-演示程序</title>
