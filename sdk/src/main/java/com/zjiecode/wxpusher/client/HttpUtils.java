@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ import java.util.Set;
  */
 public final class HttpUtils {
     private static final String BASE_URL = "http://wxpusher.zjiecode.com";
+    private static final String CHARSET_NAME ="UTF-8";
 
     private HttpUtils() {
     }
@@ -47,11 +50,11 @@ public final class HttpUtils {
             urlConnection.setRequestMethod("POST");
             //设置请求属性
             urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setRequestProperty("Charset", CHARSET_NAME);
             urlConnection.setDoOutput(true);
             urlConnection.connect();
             OutputStream outputStream = urlConnection.getOutputStream();
-            outputStream.write(dataStr.getBytes());
+            outputStream.write(dataStr.getBytes(Charset.forName(CHARSET_NAME)));
             outputStream.flush();
             return dealConnect(urlConnection);
         } catch (MalformedURLException e) {
@@ -84,7 +87,7 @@ public final class HttpUtils {
             urlConnection.setUseCaches(false);
             urlConnection.setRequestMethod("GET");
             //设置请求属性
-            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setRequestProperty("Charset", CHARSET_NAME);
             urlConnection.setDoOutput(true);
             urlConnection.connect();
             return dealConnect(urlConnection);
@@ -175,7 +178,7 @@ public final class HttpUtils {
             while ((len = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, len);
             }
-            return new String(outputStream.toByteArray());
+            return new String(outputStream.toByteArray(),CHARSET_NAME);
         } catch (IOException e) {
             e.printStackTrace();
         }

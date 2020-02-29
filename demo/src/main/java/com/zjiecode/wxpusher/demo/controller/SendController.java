@@ -63,7 +63,7 @@ public class SendController {
         message.setUid(uid);
         message.setAppToken(appToken);
         message.setContent("WxPusher演示消息，这是一个Markdown消息\n# 目录\n- 什么是Wxpusher\n- Wxpusher可好用了\n## 发送状态：_成功_"
-                + "<br /><br /><br />" + sign);
+                + "\n\n<br /><br /><br />" + sign);
         return WxPusher.send(message);
     }
 
