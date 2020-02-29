@@ -23,6 +23,8 @@ public class SendController {
     @Value("${wxpusher.biz.apptoken}")
     private String appToken;
 
+    private String sign = "本消息来自WxPusher演示程序 http://wxpusher.zjiecode.com/demo";
+
     /**
      * 发送普通文本
      */
@@ -32,7 +34,7 @@ public class SendController {
         message.setContentType(Message.CONTENT_TYPE_TEXT);
         message.setUid(uid);
         message.setAppToken(appToken);
-        message.setContent("WxPusher演示消息，这里是一天普通的演示消息");
+        message.setContent("WxPusher演示消息，这里是一天普通的演示消息\n\n\n" + sign);
         return WxPusher.send(message);
     }
 
@@ -45,7 +47,8 @@ public class SendController {
         message.setContentType(Message.CONTENT_TYPE_HTML);
         message.setUid(uid);
         message.setAppToken(appToken);
-        message.setContent("WxPusher演示消息，这是一个html消息<br />标题：<span style='color:red;'>这是标题</span><br />状态：<span style='color:green;'>成功</span>");
+        message.setContent("WxPusher演示消息，这是一个html消息<br />标题：<span style='color:red;'>这是标题</span><br />状态：<span style='color:green;'>成功</span>"
+                + "<br /><br /><br />" + sign);
         return WxPusher.send(message);
     }
 
@@ -59,7 +62,8 @@ public class SendController {
         message.setContentType(Message.CONTENT_TYPE_MD);
         message.setUid(uid);
         message.setAppToken(appToken);
-        message.setContent("WxPusher演示消息，这是一个Markdown消息\n# 目录\n- 什么是Wxpusher\n- Wxpusher可好用了\n## 发送状态：_成功_");
+        message.setContent("WxPusher演示消息，这是一个Markdown消息\n# 目录\n- 什么是Wxpusher\n- Wxpusher可好用了\n## 发送状态：_成功_"
+                + "<br /><br /><br />" + sign);
         return WxPusher.send(message);
     }
 
@@ -72,7 +76,7 @@ public class SendController {
         message.setContentType(Message.CONTENT_TYPE_TEXT);
         message.setUid(uid);
         message.setAppToken(appToken);
-        message.setContent(content);
+        message.setContent(content + "\n\n\n" + sign);
         return WxPusher.send(message);
     }
 
