@@ -5,6 +5,10 @@
 
 请直接访问官方说明文档[http://wxpusher.zjiecode.com/docs](http://wxpusher.zjiecode.com/docs)
 
+## 目录说明
+- sdk 目录：JAVA SDK的源代码
+- demo 目录：[http://wxpusher.zjiecode.com/demo](http://wxpusher.zjiecode.com/demo)的源代码
+
 # 其他语言SDK
 - [Go-SDK](https://github.com/wxpusher/wxpusher-sdk-go)
 - [Python-SDK](https://github.com/wxpusher/wxpusher-sdk-python)
