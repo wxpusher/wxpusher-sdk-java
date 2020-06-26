@@ -28,6 +28,8 @@ public class Message {
 
     private String content;
 
+    private String summary;
+
     /**
      * 仅针对text消息类型有效
      */
@@ -77,6 +79,14 @@ public class Message {
 
     public String getContent() {
         return content;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     /**
