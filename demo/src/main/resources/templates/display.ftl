@@ -113,7 +113,7 @@
 </div>
 </body>
 </html>
-<script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
+<script src="//static.zjiecode.com/wxpusher/demo/fly-0.6.14.min.js"></script>
 <script>
     var fly = new Fly;
     var uid;
