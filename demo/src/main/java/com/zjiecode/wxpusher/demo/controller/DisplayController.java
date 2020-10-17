@@ -5,7 +5,10 @@ import com.zjiecode.wxpusher.client.bean.CreateQrcodeReq;
 import com.zjiecode.wxpusher.client.bean.CreateQrcodeResp;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.ResultCode;
-import com.zjiecode.wxpusher.demo.DataRepo;
+import com.zjiecode.wxpusher.client.bean.callback.AppSubscribeBean;
+import com.zjiecode.wxpusher.client.bean.callback.UpCommandBean;
+import com.zjiecode.wxpusher.demo.data.ScanQrocodeDataRepo;
+import com.zjiecode.wxpusher.demo.data.UpCommandDataRepo;
 import com.zjiecode.wxpusher.demo.result.BizException;
 import com.zjiecode.wxpusher.demo.utils.RandomUtil;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,19 +61,19 @@ public class DisplayController {
     }
 
     @GetMapping("/getuid/{qrcodeId}")
-    public Result getUidByQrcodeId(@PathVariable("qrcodeId") String qrcodeId) {
+    public Result<Map<String, Object>> getUidByQrcodeId(@PathVariable("qrcodeId") String qrcodeId) {
         if (StringUtils.isEmpty(qrcodeId)) {
-            return new Result(ResultCode.BIZ_FAIL, "二维码错误");
+            return new Result<>(ResultCode.BIZ_FAIL, "二维码错误");
         }
-        String uid = DataRepo.get(qrcodeId);
-        if (StringUtils.isEmpty(uid)) {
-            return new Result(ResultCode.SUCCESS, "等待用户扫描");
-        } else {
-            Result result = new Result(ResultCode.SUCCESS, "处理成功");
-            result.setData(uid);
-            DataRepo.remove(qrcodeId);
-            return result;
-        }
+        AppSubscribeBean appSubscribeBean = ScanQrocodeDataRepo.get(qrcodeId);
+        List<UpCommandBean> commandBeanList = UpCommandDataRepo.getData();
+        Map<String, Object> data = new HashMap<>();
+        data.put("scan", appSubscribeBean);
+        data.put("upCommand", commandBeanList);
+        Result<Map<String, Object>> result = new Result<>(ResultCode.SUCCESS, "处理成功");
+        result.setData(data);
+        ScanQrocodeDataRepo.remove(qrcodeId);
+        return result;
     }
 
 

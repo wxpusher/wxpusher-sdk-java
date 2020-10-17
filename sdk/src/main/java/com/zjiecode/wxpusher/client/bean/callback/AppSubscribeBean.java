@@ -9,10 +9,16 @@ public class AppSubscribeBean {
     public static final String SOURCE_SCAN = "scan";
     public static final String SOURCE_LINK = "link";
     private String uid;
+    private Long appId;
+    /**
+     * @deprecated 请使用appId，appKey将在后续版本删除
+     */
     private String appKey;
     private String appName;
+    private String userName;
+    private String userHeadImg;
     private Long time;
-    //来源：scan:扫码关注，link：通过链接关注
+    //来源：scan:扫码订阅，link：通过链接订阅
     private String source;
     //附加信息
     private String extra;
@@ -63,5 +69,29 @@ public class AppSubscribeBean {
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserHeadImg() {
+        return userHeadImg;
+    }
+
+    public void setUserHeadImg(String userHeadImg) {
+        this.userHeadImg = userHeadImg;
     }
 }
