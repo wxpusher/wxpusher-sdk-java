@@ -123,7 +123,7 @@
         </div>
         <p>3、上行消息：</p>
         <div>扫描上面二维码，在打开的公众号里面，发送「#123 自定义参数」 ，收到的消息将在下方显示：</div>
-
+        <div id="msg"></div>
     </div>
 </div>
 </body>
@@ -145,17 +145,19 @@
                     document.getElementById("user-info").setAttribute("style", "margin-left: 25px;");
                     document.getElementById("nick-name").innerText = user.userName;
                     document.getElementById("uid").innerText = user.uid;
-                    document.getElementById("head-img").setAttribute("src", user.headImg);
+                    document.getElementById("head-img").setAttribute("src", user.userHeadImg);
                     document.getElementById("qrcode").setAttribute("style", "display:none;");
                 }
-                // if (response.data.data) {
-                //     clearInterval(interval)
-                //     uid = response.data.data;
-                //     console.log("获取到UID：" + uid)
-                //     var uidDom = document.getElementById("step-1");
-                //     uidDom.innerText = "1、获取UID成功，你的UID为：" + uid
-                //     uidDom.setAttribute("style", "color:#42b983");
-                // }
+                var upCommand = response.data.data.upCommand;
+                if(upCommand){
+                    var text="";
+                    for (var i = 0; i<upCommand.length;i++){
+                        var msg = upCommand[i];
+                        text +="<br />"+i+"."+msg.content;
+                    }
+                    var msgDom  = document.getElementById("msg");
+                    msgDom.innerText=text;
+                }
             }).catch(function (error) {
             console.log(error);
         })

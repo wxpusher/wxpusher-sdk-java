@@ -22,7 +22,7 @@ import java.util.Set;
  * 时间：2019-09-05
  */
 public final class HttpUtils {
-    private static final String BASE_URL = "http://wxpusher.zjiecode.com";
+    private static final String BASE_URL = "http://wxpusher.test.zjiecode.com";
     private static final String CHARSET_NAME ="UTF-8";
 
     private HttpUtils() {
