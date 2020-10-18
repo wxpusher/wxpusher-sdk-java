@@ -56,7 +56,6 @@
         }
 
         .input {
-            width: 100%;
             padding: 5px;
             height: 100px;
             margin-top: 10px;
@@ -91,39 +90,58 @@
 <div class="main">
     <h2>WxPusher 演示程序</h2>
     <span>使用WxPusher免费推送消息到个人微信上，更快更便捷。<br/>
-        本程序已经开源，你可以<a target="_blank" href="https://github.com/zjiecode/wxpusher-client">点击这里</a>参考源码。</span>
+        本程序已经开源，你可以<a target="_blank" href="https://github.com/wxpusher/wxpusher-sdk-java/">点击这里</a>参考源码。</span>
     <div class="target">
         <a target="_blank" href="/admin">管理后台</a>
-        <a target="_blank" href="/docs">开发文档</a>
-        <a target="_blank" href="https://github.com/zjiecode/wxpusher-client">开发SDK和Demo</a>
+        <a target="_blank" href="/docs">API接口说明文档</a>
+        <a target="_blank" href="https://github.com/wxpusher/wxpusher-sdk-java/">本演示程序源码</a>
+        <a target="_blank" href="https://github.com/zjiecode/wxpusher-client">接入SDK</a>
     </div>
-    <img class="qrcode" id="qrcode" src="${qrcodeUrl}"/>
-    <div>
-        <p id="step-1">1、请使用微信扫描上方二维码获取你的UID；</p>
-        <div class="line" id="user-info" style="margin-left: 25px;display: none;">
-            <img id="head-img" src="" style="width: 90px;height: 100%;margin-right: 10px;">
-            <div>
-                <p>用户昵称：<span id="nick-name"></span></p>
-                <p>UID：<span id="uid"></span></p>
+
+    <div style="display: flex;flex-direction: row;align-items: center;">
+        <div style="display: flex;flex-direction: column;width:64%;">
+            <h2 style="align-self: start;">发送消息(下行消息)</h2>
+            <span>说明：调用API就可以发送消息到个人微信上。</span>
+            <img class="qrcode" id="qrcode" src="${qrcodeUrl}" style="align-self: center;"/>
+            <div class="line" id="user-info" style="margin-left: 25px;display: none;">
+                <img id="head-img" src="" style="width: 90px;height: 100%;margin-right: 10px;">
+                <div>
+                    <p>用户昵称：<span id="nick-name"></span></p>
+                    <p>UID：<span id="uid"></span></p>
+                </div>
+            </div>
+            <div id="step-1">1、请使用微信扫描上方二维码获取你的UID；</div>
+            <div class="line" id="user-info" style="margin-left: 25px;display: none;">
+                <img id="head-img" src="" style="width: 90px;height: 100%;margin-right: 10px;">
+                <div>
+                    <p>用户昵称：<span id="nick-name"></span></p>
+                    <p>UID：<span id="uid"></span></p>
+                </div>
+            </div>
+            <div class="line">2、发送消息：</div>
+            <div class="send">
+                <div>
+                    2.1、快捷发送<span style="color: #cccccc;font-size: 12px">(点击即可发送测试消息)</span>
+                </div>
+                <div class="line">
+                    <span class="link" id="send-text">发送文本消息</span><span class="link"
+                                                                         id="send-html">发送HTML消息</span><span
+                            class="link"
+                            id="send-markdown">发送Markdown消息</span>
+                </div>
+                2.2、发送自定义消息
+                <textarea class="input" placeholder="请输入你要发送的内容" id="input"></textarea>
+                <span class="link" style="align-self: flex-end;" id="send-custom">发送消息</span>
             </div>
         </div>
-        <p>2、发送消息：</p>
-        <div class="send">
-            <div>
-                2.1、快捷发送<span style="color: #cccccc;font-size: 12px">(点击即可发送测试消息)</span>
-            </div>
-            <div class="line">
-                <span class="link" id="send-text">发送文本消息</span><span class="link" id="send-html">发送HTML消息</span><span
-                        class="link"
-                        id="send-markdown">发送Markdown消息</span>
-            </div>
-            2.2、发送自定义消息
-            <textarea class="input" placeholder="请输入你要发送的内容" id="input"></textarea>
-            <span class="link" style="align-self: flex-end;" id="send-custom">发送消息</span>
+        <div style="background: #eeeeee;width: 1px;margin-top: 100px;margin-bottom: 100px;margin-left: 20px;margin-right: 20px;align-self: stretch;"></div>
+        <div style="width:35%;align-self: start;">
+            <h2>接收消息(上行消息)</h2>
+            <div>说明：个人微信发送消息，服务器可以收到回调。</div>
+            <div class="line">1、请使用微信关注公众号 WxPusher (公众号名字：新消息服务）或者扫左侧二维码也可以关注</div>
+            <div>2、在公众号里面发送「#11 自定义参数」，收到的消息将在下方显示：</div>
+            <div id="msg"></div>
         </div>
-        <p>3、上行消息：</p>
-        <div>扫描上面二维码，在打开的公众号里面，发送「#123 自定义参数」 ，收到的消息将在下方显示：</div>
-        <div id="msg"></div>
     </div>
 </div>
 </body>
@@ -149,14 +167,14 @@
                     document.getElementById("qrcode").setAttribute("style", "display:none;");
                 }
                 var upCommand = response.data.data.upCommand;
-                if(upCommand){
-                    var text="";
-                    for (var i = 0; i<upCommand.length;i++){
+                if (upCommand) {
+                    var text = "";
+                    for (var i = 0; i < upCommand.length; i++) {
                         var msg = upCommand[i];
-                        text +="<br />"+i+"."+msg.content;
+                        text += "<br />" + i + "." + msg.content;
                     }
-                    var msgDom  = document.getElementById("msg");
-                    msgDom.innerText=text;
+                    var msgDom = document.getElementById("msg");
+                    msgDom.innerText = text;
                 }
             }).catch(function (error) {
             console.log(error);
