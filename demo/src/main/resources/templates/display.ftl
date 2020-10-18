@@ -103,6 +103,7 @@
         <div style="display: flex;flex-direction: column;width:64%;">
             <h2 style="align-self: start;">发送消息(下行消息)</h2>
             <span>说明：调用API就可以发送消息到个人微信上。</span>
+            <div id="step-1">1、请使用微信扫描下方二维码获取你的UID；</div>
             <img class="qrcode" id="qrcode" src="${qrcodeUrl}" style="align-self: center;"/>
             <div class="line" id="user-info" style="margin-left: 25px;display: none;">
                 <img id="head-img" src="" style="width: 90px;height: 100%;margin-right: 10px;">
@@ -111,7 +112,6 @@
                     <p>UID：<span id="uid"></span></p>
                 </div>
             </div>
-            <div id="step-1">1、请使用微信扫描上方二维码获取你的UID；</div>
             <div class="line" id="user-info" style="margin-left: 25px;display: none;">
                 <img id="head-img" src="" style="width: 90px;height: 100%;margin-right: 10px;">
                 <div>
