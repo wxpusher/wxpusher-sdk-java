@@ -7,10 +7,13 @@ package com.zjiecode.wxpusher.client.bean.callback;
  */
 public class UpCommandBean {
     private String uid;
+    private Long appId;
     private String appKey;
     private String appName;
+    private String userName;
+    private String userHeadImg;
     private Long time;
-    //附加信息
+    //消息内容
     private String content;
 
     public String getUid() {
@@ -19,6 +22,14 @@ public class UpCommandBean {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
     public String getAppKey() {
@@ -35,6 +46,22 @@ public class UpCommandBean {
 
     public void setAppName(String appName) {
         this.appName = appName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserHeadImg() {
+        return userHeadImg;
+    }
+
+    public void setUserHeadImg(String userHeadImg) {
+        this.userHeadImg = userHeadImg;
     }
 
     public Long getTime() {

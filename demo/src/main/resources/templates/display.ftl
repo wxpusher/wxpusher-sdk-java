@@ -10,10 +10,11 @@
     <style>
         .main {
             margin: 0 auto;
-            width: 80%;
+            width: 90%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-width: 760px;
         }
 
         .target {
@@ -150,6 +151,7 @@
 <script>
     var fly = new Fly;
     var hasUser = false;
+    var uid;
     var interval = setInterval(function () {
         fly.get('/demo/getuid/${qrcodeId}')
             .then(function (response) {
@@ -163,6 +165,7 @@
                     document.getElementById("user-info").setAttribute("style", "margin-left: 25px;");
                     document.getElementById("nick-name").innerText = user.userName;
                     document.getElementById("uid").innerText = user.uid;
+                    uid = user.uid;
                     document.getElementById("head-img").setAttribute("src", user.userHeadImg);
                     document.getElementById("qrcode").setAttribute("style", "display:none;");
                 }
@@ -171,16 +174,23 @@
                     var text = "";
                     for (var i = 0; i < upCommand.length; i++) {
                         var msg = upCommand[i];
-                        text += "<br />" + i + "." + msg.content;
+                        text += createMessage(msg);
                     }
                     var msgDom = document.getElementById("msg");
-                    msgDom.innerText = text;
+                    msgDom.innerHTML = text;
                 }
             }).catch(function (error) {
             console.log(error);
         })
     }, 2000);
 
+    function createMessage(msg){
+        return "<div style=\"display: flex;flex-direction: row;align-items: center;margin-top: 5px;\">\n" +
+            "                    <img src=\""+msg.userHeadImg+"\" style=\"width: 30px;height: 100%;\"/>\n" +
+            "                    <span style=\"margin-left: 10px;margin-right: 10px;white-space: nowrap;\">"+msg.userName+"</span>:" +
+            "<span style=\"margin-left: 10px;margin-right: 10px;\">"+msg.content+"</span>\n" +
+            "                </div>";
+    }
     function send(type) {
         if (!uid) {
             alert("请先扫描二维码,获取你的UID");
