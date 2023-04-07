@@ -74,6 +74,7 @@ public final class WxPusher {
      * @param page     页码
      * @param pageSize 分页大小
      * @return 查询的数据
+     * @deprecated 请使用 {@link #queryWxUserV2(String, Integer, Integer, String, boolean, int)} 代替
      */
     public static Result<Page<WxUser>> queryWxUser(String appToken, Integer page, Integer pageSize) {
         return queryWxUser(appToken, page, pageSize, null);
@@ -85,6 +86,7 @@ public final class WxPusher {
      * @param appToken 应用token
      * @param uid      根据UID过滤用户
      * @return 查询的数据
+     * @deprecated 请使用 {@link #queryWxUserV2(String, Integer, Integer, String, boolean, int)} 代替
      */
     public static Result<Page<WxUser>> queryWxUser(String appToken, String uid) {
         return queryWxUser(appToken, 1, 1, uid);
@@ -98,6 +100,7 @@ public final class WxPusher {
      * @param pageSize 分页大小
      * @param uid      根据UID过滤用户
      * @return 查询的数据
+     * @deprecated 请使用 {@link #queryWxUserV2(String, Integer, Integer, String, boolean, int)} 代替
      */
     public static Result<Page<WxUser>> queryWxUser(String appToken, Integer page, Integer pageSize, String uid) {
         if (appToken == null || appToken.isEmpty()) {
@@ -106,7 +109,7 @@ public final class WxPusher {
         if (page == null || page <= 0) {
             return new Result(ResultCode.BIZ_FAIL, "page不合法");
         }
-        if (page == null || page <= 0) {
+        if (pageSize == null || pageSize <= 0 || pageSize > 100) {
             return new Result(ResultCode.BIZ_FAIL, "pageSize不合法");
         }
         Map<String, Object> params = new HashMap<>();
@@ -117,6 +120,46 @@ public final class WxPusher {
             params.put("uid", uid);
         }
         Result result = HttpUtils.get(params, "/api/fun/wxuser");
+        if (result.getData() != null) {
+            String jsonString = JSONObject.toJSONString(result.getData());
+            Page pageData = JSONObject.parseObject(jsonString, new TypeReference<Page<WxUser>>() {
+            });
+            result.setData(pageData);
+        }
+        return result;
+    }
+
+    /**
+     * 查询用户
+     *
+     * @param appToken 应用密钥标志
+     * @param page     请求数据的页码
+     * @param pageSize 分页大小，不能超过100
+     * @param uid      用户的uid，可选，如果不传就是查询所有用户，传uid就是查某个用户的信息。
+     * @param isBlock  查询拉黑用户，可选，不传查询所有用户，true查询拉黑用户，false查询没有拉黑的用户
+     * @param type     关注的类型，可选，不传查询所有用户，0是应用，1是主题
+     */
+    public static Result<Page<WxUser>> queryWxUserV2(String appToken, Integer page, Integer pageSize,
+                                                     String uid, boolean isBlock, int type) {
+        if (appToken == null || appToken.isEmpty()) {
+            return new Result(ResultCode.BIZ_FAIL, "appToken不能为空");
+        }
+        if (page == null || page <= 0) {
+            return new Result(ResultCode.BIZ_FAIL, "page不合法");
+        }
+        if (pageSize == null || pageSize <= 0 || pageSize > 100) {
+            return new Result(ResultCode.BIZ_FAIL, "pageSize不合法");
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("appToken", appToken);
+        params.put("page", page);
+        params.put("pageSize", pageSize);
+        params.put("isBlock", isBlock);
+        params.put("type", type);
+        if (uid != null && !uid.isEmpty()) {
+            params.put("uid", uid);
+        }
+        Result result = HttpUtils.get(params, "/api/fun/wxuser/v2");
         if (result.getData() != null) {
             String jsonString = JSONObject.toJSONString(result.getData());
             Page pageData = JSONObject.parseObject(jsonString, new TypeReference<Page<WxUser>>() {

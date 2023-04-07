@@ -31,6 +31,11 @@ public class Message {
     private String summary;
 
     /**
+     * 是否验证付费
+     */
+    private boolean verifyPay;
+
+    /**
      * 仅针对text消息类型有效
      */
     private String url;
@@ -102,5 +107,13 @@ public class Message {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setVerifyPay(boolean verifyPay) {
+        this.verifyPay = verifyPay;
+    }
+
+    public boolean isVerifyPay() {
+        return verifyPay;
     }
 }

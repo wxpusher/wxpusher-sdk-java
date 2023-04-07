@@ -7,20 +7,76 @@ package com.zjiecode.wxpusher.client.bean;
  */
 public class WxUser {
 
+    //id，如果调用删除或者拉黑接口，需要这个id
+    private Long id;
     //UID，用户标志
     private String uid;
-
-    //用户是否接收消息，也就是是否打开了消息开关
+    /**
+     * 用户是否打开接收消息
+     */
     private Boolean enable;
+    //用户关注的应用或者主题id，根据type来区分
+    private Long appOrTopicId;
+    /**
+     * 昵称
+     *
+     * @deprecated 微信已经不再返回这个字段
+     */
+    private String nickName;
 
+    /**
+     * 微信头像
+     *
+     * @deprecated 微信已经不再返回这个字段
+     */
+    private String headImg;
+    /**
+     * 是否拉黑用户
+     */
+    private boolean reject;
+    //关注类型，0：关注应用，1：关注topic
+    private int type;
+    //关注的应用或者主题名字
+    private String name;
+
+    /**
+     * /0表示用户不是付费用户，大于0表示用户付费订阅到期时间，毫秒级时间戳
+     */
+    private long payEndTime;
     //用户关注应用的时间
     private Long createTime;
 
-    //昵称
-    private String nickName;
+    public Long getId() {
+        return id;
+    }
 
-    //头像
-    private String headImg;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public Long getAppOrTopicId() {
+        return appOrTopicId;
+    }
+
+    public void setAppOrTopicId(Long appOrTopicId) {
+        this.appOrTopicId = appOrTopicId;
+    }
 
     public String getNickName() {
         return nickName;
@@ -38,12 +94,36 @@ public class WxUser {
         this.headImg = headImg;
     }
 
-    public String getUid() {
-        return uid;
+    public boolean isReject() {
+        return reject;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setReject(boolean reject) {
+        this.reject = reject;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getPayEndTime() {
+        return payEndTime;
+    }
+
+    public void setPayEndTime(long payEndTime) {
+        this.payEndTime = payEndTime;
     }
 
     public Long getCreateTime() {
@@ -52,13 +132,5 @@ public class WxUser {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
-    }
-
-    public Boolean getEnable() {
-        return enable;
-    }
-
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
     }
 }
