@@ -7,7 +7,8 @@ package com.zjiecode.wxpusher.client.bean.callback;
  */
 public class BaseCallBackReq {
     //二维码被扫描的时候
-    public static final String ACTION_APP_SUBSCRIBE="app_subscribe";
+    public static final String ACTION_APP_SUBSCRIBE = "app_subscribe";
+    public static final String ACTION_ORDER_PAY = "order_pay";
     //回调的事件
     private String action;
     private Object data;

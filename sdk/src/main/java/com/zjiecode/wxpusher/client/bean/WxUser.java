@@ -8,15 +8,17 @@ package com.zjiecode.wxpusher.client.bean;
 public class WxUser {
 
     //id，如果调用删除或者拉黑接口，需要这个id
-    private Long id;
+    private long id;
     //UID，用户标志
     private String uid;
     /**
      * 用户是否打开接收消息
      */
-    private Boolean enable;
+    private boolean enable;
     //用户关注的应用或者主题id，根据type来区分
     private Long appOrTopicId;
+    // 关注的应用或者主题名字
+    private String target;
     /**
      * 昵称
      *
@@ -44,13 +46,13 @@ public class WxUser {
      */
     private long payEndTime;
     //用户关注应用的时间
-    private Long createTime;
+    private long createTime;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,11 +64,11 @@ public class WxUser {
         this.uid = uid;
     }
 
-    public Boolean getEnable() {
+    public boolean isEnable() {
         return enable;
     }
 
-    public void setEnable(Boolean enable) {
+    public void setEnable(boolean enable) {
         this.enable = enable;
     }
 
@@ -76,6 +78,14 @@ public class WxUser {
 
     public void setAppOrTopicId(Long appOrTopicId) {
         this.appOrTopicId = appOrTopicId;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public String getNickName() {
@@ -126,11 +136,11 @@ public class WxUser {
         this.payEndTime = payEndTime;
     }
 
-    public Long getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Long createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }
