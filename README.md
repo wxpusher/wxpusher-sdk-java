@@ -81,10 +81,10 @@ Result result = WxPusher.queryMessageStatus(messageId);
 ### 查询关注APP的微信用户列表
 ```java
 //分页查询全部用户
-Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_xxxxx", 1, 50);
+Result<Page<WxUser>> wxUserList = WxPusher.queryWxUserV2("AT_xxx", 1, 50, null, false, 0);
 wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
 //根据查询指定UID用户
-Result<Page<WxUser>> users = WxPusher.queryWxUser("AT_xxxx", "UID_xxxx");
+Result<Page<WxUser>> users = WxPusher.queryWxUserV2("AT_xxx", 1, 50, "UID_", false, 0);
 System.out.println(JSONObject.toJSONString(users));
 ```
 
