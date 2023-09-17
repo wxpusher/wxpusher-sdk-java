@@ -73,7 +73,7 @@ if (tempQrcode.isSuccess()) {
 
 
 ### 查询消息发送状态
-发送消息是异步的，你可以通过这个api查询消息发送状态
+发送消息是异步的，你可以通过这个api查询消息发送状态，推送到微信，即标记发送成功。
 ```java
 Result result = WxPusher.queryMessageStatus(messageId);
 ```
