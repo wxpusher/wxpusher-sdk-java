@@ -1,27 +1,20 @@
 package com.zjiecode.wxpusher.client.bean.callback;
 
 /**
- * 说明：二维码被扫描的时候的回调数据结构
+ * 说明：上行消息内容
  * 作者：zjiecode
- * 时间：2019-10-05
+ * 时间：2020-10-17
  */
-public class AppSubscribeBean {
-    public static final String SOURCE_SCAN = "scan";
-    public static final String SOURCE_LINK = "link";
+public class UpCommandBean {
     private String uid;
     private Long appId;
-    /**
-     * @deprecated 请使用appId，appKey将在后续版本删除
-     */
     private String appKey;
     private String appName;
     private String userName;
     private String userHeadImg;
     private Long time;
-    //来源：scan:扫码订阅，link：通过链接订阅
-    private String source;
-    //附加信息
-    private String extra;
+    //消息内容
+    private String content;
 
     public String getUid() {
         return uid;
@@ -29,6 +22,14 @@ public class AppSubscribeBean {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
     public String getAppKey() {
@@ -47,38 +48,6 @@ public class AppSubscribeBean {
         this.appName = appName;
     }
 
-    public Long getTime() {
-        return time;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -93,5 +62,21 @@ public class AppSubscribeBean {
 
     public void setUserHeadImg(String userHeadImg) {
         this.userHeadImg = userHeadImg;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
