@@ -2,14 +2,7 @@ package com.zjiecode.wxpusher.client;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.zjiecode.wxpusher.client.bean.CreateQrcodeReq;
-import com.zjiecode.wxpusher.client.bean.CreateQrcodeResp;
-import com.zjiecode.wxpusher.client.bean.Message;
-import com.zjiecode.wxpusher.client.bean.MessageResult;
-import com.zjiecode.wxpusher.client.bean.Page;
-import com.zjiecode.wxpusher.client.bean.Result;
-import com.zjiecode.wxpusher.client.bean.ResultCode;
-import com.zjiecode.wxpusher.client.bean.WxUser;
+import com.zjiecode.wxpusher.client.bean.*;
 
 import java.util.HashMap;
 import java.util.List;

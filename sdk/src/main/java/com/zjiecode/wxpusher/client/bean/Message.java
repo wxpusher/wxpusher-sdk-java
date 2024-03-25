@@ -18,6 +18,15 @@ public class Message {
     public static final int CONTENT_TYPE_HTML = 2;
     public static final int CONTENT_TYPE_MD = 3;
 
+    /**
+     * verifyPayType=0，表示本条消息，不验证付费状态，发送给所有用户
+     * verifyPayType=1，表示本条消息，只发送给付费订阅期内的用户
+     * verifyPayType=2，表示本条消息，只发送给未订阅或者付费订阅过期的用户
+     */
+    public static final int VERIFY_PAY_TYPE_IGNORE = 0;
+    public static final int VERIFY_PAY_TYPE_IN_PAY = 1;
+    public static final int VERIFY_PAY_TYPE_OUT_PAY = 2;
+
     private String appToken;
 
     //发送的目标
@@ -32,8 +41,11 @@ public class Message {
 
     /**
      * 是否验证付费
+     * @deprecated 请使用verifyPayType
      */
-    private boolean verifyPay;
+    private Boolean verifyPay;
+
+    private Integer verifyPayType;
 
     /**
      * 仅针对text消息类型有效
@@ -109,11 +121,19 @@ public class Message {
         this.url = url;
     }
 
-    public void setVerifyPay(boolean verifyPay) {
+    public void setVerifyPay(Boolean verifyPay) {
         this.verifyPay = verifyPay;
     }
 
-    public boolean isVerifyPay() {
+    public Boolean isVerifyPay() {
         return verifyPay;
+    }
+
+    public void setVerifyPayType(Integer verifyPayType) {
+        this.verifyPayType = verifyPayType;
+    }
+
+    public Integer getVerifyPayType() {
+        return verifyPayType;
     }
 }
