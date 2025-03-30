@@ -41,15 +41,6 @@ publishing {
     }
 }
 
-////包配置信息
-//ext {
-//    version = "2.1.8-local"
-//    artifactId = "wxpusher-java-sdk"
-//    projectUrl = "https://github.com/wxpusher/wxpusher-java-sdk.git"
-//    description = "微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，详情请看：http://wxpusher.zjiecode.com/docs"
-//    user = 'wxpusher'
-//}
-
 repositories {
     mavenCentral()
 }
@@ -58,61 +49,42 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
-//publishing {
-//    publications {
-//        Production(MavenPublication) {
-//            from components.java
-//            artifact sourcesJar
-//            artifact javadocJar
-//            groupId 'com.zjiecode'
-//            artifactId this.ext.artifactId
-//            version this.ext.version
-//            pom.withXml {
-//                //添加pom中缺失的信息，以发布到mavencenter
-//                def projectNode = asNode()
-//                projectNode.appendNode('name', this.ext.artifactId)
-//                projectNode.appendNode('description', this.ext.description)
-//                projectNode.appendNode('url', this.ext.projectUrl)
-//                projectNode.appendNode('scm').appendNode("url", this.ext.projectUrl)
-//                def license = projectNode.appendNode('licenses').appendNode("license")
-//                license.appendNode('name', "MIT")
-//                license.appendNode('url', "https://mit-license.org/")
-//                def developer = projectNode.appendNode("developers").appendNode("developer")
-//                developer.appendNode("id", "zjiecode")
-//                developer.appendNode("email", "zjiecode@qq.com")
-//            }
-//        }
-//    }
-//}
 
+// 配置生成校验文件
+tasks.withType(AbstractPublishToMaven) {
+    dependsOn tasks.withType(GenerateMavenPom)
+}
 
-//bintray {
-//    user = this.ext.user
-//    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-//    publications = ['Production']
-//    pkg {
-//        repo = 'maven'
-//        name = this.ext.artifactId
-//        userOrg = this.ext.user
-//        licenses = ['MIT']
-//        vcsUrl = this.ext.projectUrl
-//        labels = ['wechat', 'push', 'notification', 'pushsdk']
-//        publicDownloadNumbers = true
-//        version {
-//            desc = this.ext.description
-//            vcsTag = this.ext.version
-//            released = new Date()
-//            name = this.ext.version
-//        }
-//    }
-//}
+tasks.withType(GenerateMavenPom).configureEach {
+    doLast {
+        def pomFile = destination
+        def md5File = new File(pomFile.parent, pomFile.name + '.md5')
+        def sha1File = new File(pomFile.parent, pomFile.name + '.sha1')
 
-//task sourcesJar(type: Jar, dependsOn: classes) {
-//    classifier = 'sources'
-//    from sourceSets.main.allSource
-//}
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
+        // 生成 MD5 - 使用正确的格式
+        ant.checksum(file: pomFile, algorithm: 'MD5', property: 'md5sum')
+        md5File.text = ant.md5sum
+
+        // 生成 SHA1 - 使用正确的格式
+        ant.checksum(file: pomFile, algorithm: 'SHA1', property: 'sha1sum')
+        sha1File.text = ant.sha1sum
+    }
+}
+
+tasks.withType(PublishToMavenRepository).configureEach {
+    doLast {
+        publication.artifacts.each { artifact ->
+            def file = artifact.file
+            def md5File = new File(file.parent, file.name + '.md5')
+            def sha1File = new File(file.parent, file.name + '.sha1')
+
+            // 生成 MD5
+            ant.checksum(file: file, algorithm: 'MD5', property: 'md5sum')
+            md5File.text = ant.md5sum
+
+            // 生成 SHA1
+            ant.checksum(file: file, algorithm: 'SHA1', property: 'sha1sum')
+            sha1File.text = ant.sha1sum
+        }
+    }
+}
