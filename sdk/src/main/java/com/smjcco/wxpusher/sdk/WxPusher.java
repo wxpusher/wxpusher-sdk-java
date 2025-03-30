@@ -39,7 +39,7 @@ public final class WxPusher {
         defaultWxPusher = new WxPusher(appToken);
     }
 
-    public WxPusher getDefaultWxPusher() {
+    public static WxPusher getDefaultWxPusher() {
         return defaultWxPusher;
     }
 
@@ -90,6 +90,7 @@ public final class WxPusher {
      * 创建带参数的app临时二维码
      */
     public Result<CreateQrcodeResp> createAppTempQrcode(CreateQrcodeReq createQrcodeReq) {
+        createQrcodeReq.setAppToken(appToken);
         return HttpUtils.post(createQrcodeReq, "/api/fun/create/qrcode", CreateQrcodeResp.class);
     }
 

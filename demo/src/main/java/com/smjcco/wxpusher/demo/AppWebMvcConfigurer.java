@@ -1,9 +1,9 @@
-package com.zjiecode.wxpusher.demo;
+package com.smjcco.wxpusher.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zjiecode.wxpusher.demo.result.*;
+import com.smjcco.wxpusher.demo.result.*;
 
-import com.zjiecode.wxpusher.demo.utils.ThrowableUtils;
+import com.smjcco.wxpusher.demo.utils.ThrowableUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;

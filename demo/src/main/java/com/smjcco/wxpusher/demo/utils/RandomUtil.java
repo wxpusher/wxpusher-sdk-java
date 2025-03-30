@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.utils;
+package com.smjcco.wxpusher.demo.utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 

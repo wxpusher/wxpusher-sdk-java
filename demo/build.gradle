@@ -1,15 +1,15 @@
 apply plugin: 'java'
-apply plugin: 'idea'
+//apply plugin: 'idea'
 //apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'io.spring.dependency-management'
 
-//Java 8
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
+//还有很多开发者用1.8，编译成低版本的，方便兼容
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 buildscript {
     repositories {
-//        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -19,9 +19,6 @@ buildscript {
 }
 
 repositories {
-    group 'com.zjiecode.wxpusher'
-    version '0.0.1'
-    jcenter()
     mavenCentral()
 }
 
@@ -30,11 +27,12 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     //spring boot
-//    compile 'org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE'
 
     //freemarker html模版渲染引擎
-//    compile 'org.springframework.boot:spring-boot-starter-freemarker:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker:2.1.4.RELEASE'
 
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.56'
     //test
 //    testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE'
 //    testCompile 'org.springframework.boot:spring-boot-test:2.1.4.RELEASE'
@@ -42,7 +40,6 @@ dependencies {
 //    testCompile 'junit:junit:4.12'
 
     //实际开发中，请直接通过jar包依赖，在本demo中，直接工程依赖的sdk源码
-//    compile project(":sdk")
-//  compile 'com.zjiecode:wxpusher-sdk-java:{version}'
+    implementation project(":sdk")
 
 }

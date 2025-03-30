@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.data;
+package com.smjcco.wxpusher.demo.data;
 
 import java.util.*;
 

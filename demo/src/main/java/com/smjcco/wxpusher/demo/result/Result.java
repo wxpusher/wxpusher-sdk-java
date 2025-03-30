@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.result;
+package com.smjcco.wxpusher.demo.result;
 
 /**
  * 返回结果数据结构

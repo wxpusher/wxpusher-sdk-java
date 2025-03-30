@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.result;
+package com.smjcco.wxpusher.demo.result;
 
 /**
  * 业务异常，一般不是应用的错误，比如：用户登陆没有输入账号

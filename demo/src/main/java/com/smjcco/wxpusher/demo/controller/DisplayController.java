@@ -1,17 +1,17 @@
-package com.zjiecode.wxpusher.demo.controller;
+package com.smjcco.wxpusher.demo.controller;
 
-import com.zjiecode.wxpusher.client.WxPusher;
+import com.smjcco.wxpusher.demo.data.ScanQrocodeDataRepo;
+import com.smjcco.wxpusher.demo.data.UpCommandDataRepo;
+import com.smjcco.wxpusher.demo.result.BizException;
+import com.smjcco.wxpusher.demo.utils.RandomUtil;
+import com.smjcco.wxpusher.sdk.WxPusher;
 import com.smjcco.wxpusher.sdk.bean.CreateQrcodeReq;
 import com.smjcco.wxpusher.sdk.bean.CreateQrcodeResp;
 import com.smjcco.wxpusher.sdk.bean.Result;
 import com.smjcco.wxpusher.sdk.bean.ResultCode;
 import com.smjcco.wxpusher.sdk.bean.callback.AppSubscribeBean;
 import com.smjcco.wxpusher.sdk.bean.callback.UpCommandBean;
-import com.zjiecode.wxpusher.demo.data.ScanQrocodeDataRepo;
-import com.zjiecode.wxpusher.demo.data.UpCommandDataRepo;
-import com.zjiecode.wxpusher.demo.result.BizException;
-import com.zjiecode.wxpusher.demo.utils.RandomUtil;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 说明：演示发送消息
  * 作者：zjiecode
@@ -35,8 +33,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/demo")
 @Slf4j
 public class DisplayController {
-    @Value("${wxpusher.biz.apptoken}")
-    private String appToken;
 
     /**
      * 发送普通文本
@@ -47,10 +43,9 @@ public class DisplayController {
         String qrcodeId = RandomUtil.getRandomStr(32);
         //创建一个参数二维码
         CreateQrcodeReq createQrcodeReq = new CreateQrcodeReq();
-        createQrcodeReq.setAppToken(appToken);
         createQrcodeReq.setValidTime(3600);//二维码有效时间
         createQrcodeReq.setExtra(qrcodeId);
-        Result<CreateQrcodeResp> tempQrcode = WxPusher.createAppTempQrcode(createQrcodeReq);
+        Result<CreateQrcodeResp> tempQrcode = WxPusher.getDefaultWxPusher().createAppTempQrcode(createQrcodeReq);
         if (!tempQrcode.isSuccess()) {
             throw new BizException(tempQrcode.getMsg());
         }

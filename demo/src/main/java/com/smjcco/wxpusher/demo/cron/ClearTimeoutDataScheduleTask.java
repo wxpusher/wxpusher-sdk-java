@@ -1,7 +1,7 @@
-package com.zjiecode.wxpusher.demo.cron;
+package com.smjcco.wxpusher.demo.cron;
 
-import com.zjiecode.wxpusher.demo.data.ScanQrocodeDataRepo;
-import com.zjiecode.wxpusher.demo.data.UpCommandDataRepo;
+import com.smjcco.wxpusher.demo.data.ScanQrocodeDataRepo;
+import com.smjcco.wxpusher.demo.data.UpCommandDataRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

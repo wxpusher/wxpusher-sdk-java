@@ -1,11 +1,10 @@
-package com.zjiecode.wxpusher.demo.controller;
+package com.smjcco.wxpusher.demo.controller;
 
-import com.zjiecode.wxpusher.client.WxPusher;
+import com.smjcco.wxpusher.sdk.WxPusher;
 import com.smjcco.wxpusher.sdk.bean.Message;
 import com.smjcco.wxpusher.sdk.bean.Result;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +33,8 @@ public class SendController {
         message.setContentType(Message.CONTENT_TYPE_TEXT);
         message.setUid(uid);
         message.setAppToken(appToken);
-        message.setContent("WxPusher演示消息，这里是一天普通的演示消息\n\n\n" + sign);
-        return WxPusher.send(message);
+        message.setContent("WxPusher演示消息，这里是一条普通的演示消息\n\n\n" + sign);
+        return WxPusher.getDefaultWxPusher().send(message);
     }
 
     /**
@@ -49,7 +48,7 @@ public class SendController {
         message.setAppToken(appToken);
         message.setContent("WxPusher演示消息，这是一个html消息<br />标题：<span style='color:red;'>这是标题</span><br />状态：<span style='color:green;'>成功</span>"
                 + "<br /><br /><br />" + sign);
-        return WxPusher.send(message);
+        return WxPusher.getDefaultWxPusher().send(message);
     }
 
 
@@ -64,7 +63,7 @@ public class SendController {
         message.setAppToken(appToken);
         message.setContent("WxPusher演示消息，这是一个Markdown消息\n# 目录\n- 什么是Wxpusher\n- Wxpusher可好用了\n## 发送状态：_成功_"
                 + "\n\n<br /><br /><br />" + sign);
-        return WxPusher.send(message);
+        return WxPusher.getDefaultWxPusher().send(message);
     }
 
     /**
@@ -77,7 +76,7 @@ public class SendController {
         message.setUid(uid);
         message.setAppToken(appToken);
         message.setContent(content + "\n\n\n" + sign);
-        return WxPusher.send(message);
+        return WxPusher.getDefaultWxPusher().send(message);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.data;
+package com.smjcco.wxpusher.demo.data;
 
 import com.smjcco.wxpusher.sdk.bean.callback.UpCommandBean;
 import lombok.extern.slf4j.Slf4j;

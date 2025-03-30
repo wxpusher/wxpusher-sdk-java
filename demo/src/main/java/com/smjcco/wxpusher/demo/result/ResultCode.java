@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.demo.result;
+package com.smjcco.wxpusher.demo.result;
 
 /**
  * 返回编码,参考http语义
