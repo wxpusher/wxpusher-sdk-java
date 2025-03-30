@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean;
+package com.smjcco.wxpusher.sdk.bean;
 
 /**
  * 说明：创建带参数的app临时二维码

@@ -1,7 +1,7 @@
-package com.zjiecode.wxpusher.client;
+package com.smjcco.wxpusher.sdk;
 
 import com.alibaba.fastjson2.TypeReference;
-import com.zjiecode.wxpusher.client.bean.*;
+import com.smjcco.wxpusher.sdk.bean.*;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

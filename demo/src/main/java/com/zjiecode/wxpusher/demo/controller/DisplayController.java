@@ -1,12 +1,12 @@
 package com.zjiecode.wxpusher.demo.controller;
 
 import com.zjiecode.wxpusher.client.WxPusher;
-import com.zjiecode.wxpusher.client.bean.CreateQrcodeReq;
-import com.zjiecode.wxpusher.client.bean.CreateQrcodeResp;
-import com.zjiecode.wxpusher.client.bean.Result;
-import com.zjiecode.wxpusher.client.bean.ResultCode;
-import com.zjiecode.wxpusher.client.bean.callback.AppSubscribeBean;
-import com.zjiecode.wxpusher.client.bean.callback.UpCommandBean;
+import com.smjcco.wxpusher.sdk.bean.CreateQrcodeReq;
+import com.smjcco.wxpusher.sdk.bean.CreateQrcodeResp;
+import com.smjcco.wxpusher.sdk.bean.Result;
+import com.smjcco.wxpusher.sdk.bean.ResultCode;
+import com.smjcco.wxpusher.sdk.bean.callback.AppSubscribeBean;
+import com.smjcco.wxpusher.sdk.bean.callback.UpCommandBean;
 import com.zjiecode.wxpusher.demo.data.ScanQrocodeDataRepo;
 import com.zjiecode.wxpusher.demo.data.UpCommandDataRepo;
 import com.zjiecode.wxpusher.demo.result.BizException;

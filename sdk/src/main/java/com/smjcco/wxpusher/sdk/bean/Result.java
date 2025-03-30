@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean;
+package com.smjcco.wxpusher.sdk.bean;
 
 public class Result<T> {
     private Integer code;

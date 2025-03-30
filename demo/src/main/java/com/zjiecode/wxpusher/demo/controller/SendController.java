@@ -1,8 +1,8 @@
 package com.zjiecode.wxpusher.demo.controller;
 
 import com.zjiecode.wxpusher.client.WxPusher;
-import com.zjiecode.wxpusher.client.bean.Message;
-import com.zjiecode.wxpusher.client.bean.Result;
+import com.smjcco.wxpusher.sdk.bean.Message;
+import com.smjcco.wxpusher.sdk.bean.Result;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;

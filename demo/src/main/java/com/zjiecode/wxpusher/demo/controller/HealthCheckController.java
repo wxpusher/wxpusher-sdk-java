@@ -28,7 +28,7 @@ public class HealthCheckController {
         long now = System.currentTimeMillis();
         Map<String, Object> data = new HashMap<>();
         data.put("系统启动时间", DateUtil.formatTimeLong(now - startTime));
-        com.zjiecode.wxpusher.client.bean.Result result = WxPusher.queryMessageStatus(1L);
+        com.smjcco.wxpusher.sdk.bean.Result result = WxPusher.queryMessageStatus(1L);
         boolean connectWxPusher = (result.getCode() == ResultCode.SUCCESS.getCode()) ||
                 (result.getCode() == ResultCode.BIZ_FAIL.getCode());
         data.put("到WxPuhser的链接状态", connectWxPusher);

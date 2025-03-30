@@ -2,10 +2,10 @@ package com.zjiecode.wxpusher.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zjiecode.wxpusher.client.WxPusher;
-import com.zjiecode.wxpusher.client.bean.Message;
-import com.zjiecode.wxpusher.client.bean.callback.AppSubscribeBean;
-import com.zjiecode.wxpusher.client.bean.callback.BaseCallBackReq;
-import com.zjiecode.wxpusher.client.bean.callback.UpCommandBean;
+import com.smjcco.wxpusher.sdk.bean.Message;
+import com.smjcco.wxpusher.sdk.bean.callback.AppSubscribeBean;
+import com.smjcco.wxpusher.sdk.bean.callback.BaseCallBackReq;
+import com.smjcco.wxpusher.sdk.bean.callback.UpCommandBean;
 import com.zjiecode.wxpusher.demo.data.ScanQrocodeDataRepo;
 
 import com.zjiecode.wxpusher.demo.data.UpCommandDataRepo;

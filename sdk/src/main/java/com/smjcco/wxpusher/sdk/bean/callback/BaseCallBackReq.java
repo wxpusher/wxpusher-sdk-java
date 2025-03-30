@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean.callback;
+package com.smjcco.wxpusher.sdk.bean.callback;
 
 /**
  * 说明：wxpusher回调的数据结构

@@ -2,7 +2,7 @@ package com.zjiecode.wxpusher.demo.data;
 
 import java.util.*;
 
-import com.zjiecode.wxpusher.client.bean.callback.AppSubscribeBean;
+import com.smjcco.wxpusher.sdk.bean.callback.AppSubscribeBean;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean.callback;
+package com.smjcco.wxpusher.sdk.bean.callback;
 
 /**
  * 说明：二维码被扫描的时候的回调数据结构

@@ -1,10 +1,10 @@
-package com.zjiecode.wxpusher.client;
+package com.smjcco.wxpusher.sdk;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.TypeReference;
-import com.zjiecode.wxpusher.client.bean.Result;
-import com.zjiecode.wxpusher.client.bean.ResultCode;
+import com.smjcco.wxpusher.sdk.bean.Result;
+import com.smjcco.wxpusher.sdk.bean.ResultCode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

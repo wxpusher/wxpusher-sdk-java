@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean;
+package com.smjcco.wxpusher.sdk.bean;
 
 /**
  * 返回编码,参考http语义

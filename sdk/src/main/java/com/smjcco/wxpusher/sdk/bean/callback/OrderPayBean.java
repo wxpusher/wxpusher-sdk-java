@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client.bean.callback;
+package com.smjcco.wxpusher.sdk.bean.callback;
 
 public class OrderPayBean {
     //付费增加的时间，毫秒。退款是负数，表示减少的订阅时间。

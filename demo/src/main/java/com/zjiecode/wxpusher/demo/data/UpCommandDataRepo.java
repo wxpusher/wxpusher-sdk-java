@@ -1,6 +1,6 @@
 package com.zjiecode.wxpusher.demo.data;
 
-import com.zjiecode.wxpusher.client.bean.callback.UpCommandBean;
+import com.smjcco.wxpusher.sdk.bean.callback.UpCommandBean;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

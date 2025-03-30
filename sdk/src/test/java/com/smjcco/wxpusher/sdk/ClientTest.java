@@ -1,4 +1,4 @@
-package com.zjiecode.wxpusher.client;
+package com.smjcco.wxpusher.sdk;
 
 /**
  * 说明：接口测试
