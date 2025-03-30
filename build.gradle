@@ -3,8 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE"
-//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+
     }
 }
 
