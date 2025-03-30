@@ -134,7 +134,7 @@ public final class WxPusher {
             params.put("uid", uid);
         }
 
-        Type resultType = new TypeReference<List<MessageResult>>() {
+        Type resultType = new TypeReference<Page<WxUser>>() {
         }.getType();
         return HttpUtils.get(params, "/api/fun/wxuser/v2", resultType);
     }
