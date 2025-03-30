@@ -89,7 +89,7 @@
 </head>
 <body>
 <div class="main">
-    <h2>WxPusher 演示程序</h2>
+    <h2>WxPusher消息推送平台 - 演示程序</h2>
     <span>使用WxPusher免费推送消息到个人微信上，更快更便捷。<br/>
         本程序已经开源，你可以<a target="_blank" href="https://github.com/wxpusher/wxpusher-sdk-java/">点击这里</a>参考源码。</span>
     <div class="target">
@@ -159,6 +159,7 @@
                 var user = response.data.data.scan;
                 if (!hasUser && user) {
                     hasUser = true;
+                    clearInterval(interval);
                     var tips = document.getElementById("step-1");
                     tips.innerText = "1、已经成功获取到扫码用户，信息如下："
                     tips.setAttribute("style", "color:#42b983");

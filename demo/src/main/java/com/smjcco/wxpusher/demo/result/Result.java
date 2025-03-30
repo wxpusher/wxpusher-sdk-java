@@ -1,8 +1,13 @@
 package com.smjcco.wxpusher.demo.result;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 返回结果数据结构
  */
+@Setter
+@Getter
 public class Result<T> {
     private Integer code;
     private String msg;
@@ -18,38 +23,16 @@ public class Result<T> {
         this.code = code.getCode();
         this.msg = msg;
     }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public static <T> Result<T> getSuccess(T data) {
+        return new Result<>(ResultCode.SUCCESS, "处理成功", data);
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public static <T> Result<T> getSuccess() {
+        return new Result<>(ResultCode.SUCCESS, "处理成功");
     }
 
-    public static <T> Result getSuccess(T data) {
-        return new Result(ResultCode.SUCCESS, "处理成功", data);
-    }
-
-    public static <T> Result getSuccess() {
-        return new Result(ResultCode.SUCCESS, "处理成功");
-    }
-
-    public static Result getBizFail(String msg) {
-        return new Result(ResultCode.BIZ_FAIL, msg);
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public T getData() {
-        return data;
+    public static Result<?> getBizFail(String msg) {
+        return new Result<>(ResultCode.BIZ_FAIL, msg);
     }
 
     public  boolean isSuccess() {

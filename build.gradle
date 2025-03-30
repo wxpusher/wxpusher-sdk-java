@@ -1,12 +1,12 @@
+
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.7.18"
     }
 }
-
 tasks.register('clean', Delete) {
     delete new File(getRootDir(), "out")
     delete new File(getRootDir(), "build")

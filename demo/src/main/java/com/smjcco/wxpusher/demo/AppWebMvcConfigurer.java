@@ -97,9 +97,10 @@ public class AppWebMvcConfigurer implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         //配置跨域请求
         registry.addMapping("/**")
+                .allowedOrigins("https://wxpusher.zjiecode.com")
                 .allowedOrigins("*")
                 .allowedHeaders("*")
-                .allowCredentials(true)
+                .allowCredentials(false)
                 .allowedMethods("*");
     }
 
