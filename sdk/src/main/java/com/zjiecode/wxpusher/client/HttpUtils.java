@@ -1,6 +1,8 @@
 package com.zjiecode.wxpusher.client;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.TypeReference;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.ResultCode;
 
@@ -8,11 +10,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,81 +25,66 @@ import java.util.Set;
  */
 public final class HttpUtils {
     private static final String BASE_URL = "https://wxpusher.zjiecode.com";
-    private static final String CHARSET_NAME ="UTF-8";
+    private static final String CHARSET_NAME = "UTF-8";
 
     private HttpUtils() {
     }
 
-    /**
-     * 发送post请求
-     *
-     * @param data 发送的数据
-     * @param path 请求后台的path
-     * @return 发送的result结果
-     */
-    public static Result post(Object data, String path) {
-        try {
-            if (data == null) {
-                return new Result(ResultCode.UNKNOWN_ERROR, "数据为空");
-            }
-            String dataStr = JSONObject.toJSONString(data);
-
-            URL cUrl = new URL(buildUrl(path));
-            HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
-            urlConnection.setConnectTimeout(60000);
-            urlConnection.setReadTimeout(60000);
-            urlConnection.setUseCaches(false);
-            urlConnection.setRequestMethod("POST");
-            //设置请求属性
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestProperty("Charset", CHARSET_NAME);
-            urlConnection.setDoOutput(true);
-            urlConnection.connect();
-            OutputStream outputStream = urlConnection.getOutputStream();
-            outputStream.write(dataStr.getBytes(Charset.forName(CHARSET_NAME)));
-            outputStream.flush();
-            return dealConnect(urlConnection);
-        } catch (MalformedURLException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.getMessage());
-        } catch (IOException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.toString());
-        } catch (Throwable e) {
-            return new Result(ResultCode.UNKNOWN_ERROR, e.toString());
-        }
-    }
-
-    public static Result get(String path) {
-        return get(null, path);
-    }
-
-    /**
-     * 发送get请求
-     */
-    public static Result get(Map<String, Object> data, String path) {
+    public static <T> Result<T> request(Object body, Map<String, Object> queryMap, String path, String method, Type returnType) {
         try {
             String url = buildUrl(path);
-            String query = parseMap2Query(data);
-            if (!query.isEmpty()) {
-                url = url + "?" + query;
+            if (queryMap != null) {
+                String query = parseMap2Query(queryMap);
+                if (!query.isEmpty()) {
+                    url = url + "?" + query;
+                }
             }
             URL cUrl = new URL(url);
-            HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
-            urlConnection.setConnectTimeout(60000);
-            urlConnection.setReadTimeout(60000);
-            urlConnection.setUseCaches(false);
-            urlConnection.setRequestMethod("GET");
-            //设置请求属性
-            urlConnection.setRequestProperty("Charset", CHARSET_NAME);
-            urlConnection.setDoOutput(true);
-            urlConnection.connect();
-            return dealConnect(urlConnection);
+            HttpURLConnection urlConnection = getHttpURLConnection(cUrl, method);
+            if (body != null) {
+                OutputStream outputStream = urlConnection.getOutputStream();
+                String dataStr = JSON.toJSONString(body);
+                outputStream.write(dataStr.getBytes(Charset.forName(CHARSET_NAME)));
+                outputStream.flush();
+            }
+            return dealConnect(urlConnection, returnType);
         } catch (MalformedURLException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.getMessage());
+            return new Result<>(ResultCode.NETWORK_ERROR, e.getMessage());
         } catch (IOException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.toString());
+            return new Result<>(ResultCode.NETWORK_ERROR, e.toString());
         } catch (Throwable e) {
-            return new Result(ResultCode.UNKNOWN_ERROR, e.toString());
+            return new Result<>(ResultCode.UNKNOWN_ERROR, e.toString());
         }
+    }
+
+    public static <T> Result<T> post(Object body, String path, Type returnType) {
+        return request(body, null, path, "POST", returnType);
+    }
+
+    public static <T> Result<T> get(Map<String, Object> queryMap, String path, Type returnType) {
+        return request(null, queryMap, path, "GET", returnType);
+    }
+
+
+    public static <T> Result<T> delete(Map<String, Object> queryData, String path, Type returnType) {
+        return request(null, queryData, path, "DELETE", returnType);
+    }
+
+    public static <T> Result<T> put(Map<String, Object> queryData, String path, Type returnType) {
+        return request(null, queryData, path, "PUT", returnType);
+    }
+
+    private static HttpURLConnection getHttpURLConnection(URL cUrl, String method) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
+        urlConnection.setConnectTimeout(60000);
+        urlConnection.setReadTimeout(60000);
+        urlConnection.setUseCaches(false);
+        urlConnection.setRequestMethod(method);
+        urlConnection.setRequestProperty("Content-Type", "application/json");
+        urlConnection.setRequestProperty("Charset", CHARSET_NAME);
+        urlConnection.setDoOutput(true);
+        urlConnection.connect();
+        return urlConnection;
     }
 
     /**
@@ -123,7 +110,7 @@ public final class HttpUtils {
      */
     private static String buildUrl(String path) {
         String url = BASE_URL;
-        if (path != null && path.length() > 0) {
+        if (path != null && !path.isEmpty()) {
             if (path.startsWith("/")) {
                 url = BASE_URL + path;
             } else {
@@ -137,30 +124,35 @@ public final class HttpUtils {
      * 处理连接以后的状态信息
      *
      * @param urlConnection 打开的连接
+     * @param type          返回的结果数据类型
      * @return 返回发送结果
      */
-    private static Result dealConnect(HttpURLConnection urlConnection) {
+    private static <T> Result<T> dealConnect(HttpURLConnection urlConnection, Type type) throws IOException {
         try {
             int responseCode = urlConnection.getResponseCode();
             if (responseCode != 200) {
-                return new Result(urlConnection.getResponseCode(), "http请求错误:" + responseCode);
+                return new Result<>(urlConnection.getResponseCode(), "http请求错误:" + responseCode);
             }
             InputStream inputStream = urlConnection.getInputStream();
             String res = inputStream2String(inputStream);
             if (res == null || res.isEmpty()) {
-                return new Result(ResultCode.INTERNAL_SERVER_ERROR, "服务器返回异常");
+                return new Result<>(ResultCode.INTERNAL_SERVER_ERROR, "服务器返回异常");
             }
-            Result result = JSONObject.parseObject(res, Result.class);
+            // 构造 Result<T> 的完整类型信息
+            Type resultType = new TypeReference<Result<T>>(type) {
+            }.getType();
+            // 反序列化
+            Result<T> result = JSONObject.parseObject(res, resultType);
             if (result == null) {
-                return new Result(ResultCode.DATA_ERROR, "服务器返回数据解析异常");
+                return new Result<>(ResultCode.DATA_ERROR, "服务器返回数据解析异常");
             }
             return result;
         } catch (MalformedURLException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.getMessage());
+            return new Result<>(ResultCode.NETWORK_ERROR, e.getMessage());
         } catch (IOException e) {
-            return new Result(ResultCode.NETWORK_ERROR, e.getMessage());
+            return new Result<>(ResultCode.NETWORK_ERROR, e.getMessage());
         } catch (Throwable e) {
-            return new Result(ResultCode.UNKNOWN_ERROR, e.getMessage());
+            return new Result<>(ResultCode.UNKNOWN_ERROR, e.getMessage());
         }
     }
 
@@ -178,7 +170,7 @@ public final class HttpUtils {
             while ((len = inputStream.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, len);
             }
-            return new String(outputStream.toByteArray(),CHARSET_NAME);
+            return outputStream.toString(CHARSET_NAME);
         } catch (IOException e) {
             e.printStackTrace();
         }

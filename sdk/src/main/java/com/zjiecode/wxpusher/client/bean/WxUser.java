@@ -22,21 +22,18 @@ public class WxUser {
     /**
      * 昵称
      *
-     * @deprecated 微信已经不再返回这个字段
+     * @deprecated 微信已经不再返回这个字段，如果后台后备注，会返回备注
      */
     private String nickName;
 
     /**
-     * 微信头像
-     *
-     * @deprecated 微信已经不再返回这个字段
-     */
-    private String headImg;
-    /**
      * 是否拉黑用户
      */
     private boolean reject;
-    //关注类型，0：关注应用，1：关注topic
+    /**
+     * 关注类型，0：关注应用，1：关注topic
+     * @see UserType
+     */
     private int type;
     //关注的应用或者主题名字
     private String name;
@@ -94,14 +91,6 @@ public class WxUser {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
     }
 
     public boolean isReject() {

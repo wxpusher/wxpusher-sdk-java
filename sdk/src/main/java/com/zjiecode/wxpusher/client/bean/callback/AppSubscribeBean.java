@@ -8,12 +8,11 @@ package com.zjiecode.wxpusher.client.bean.callback;
 public class AppSubscribeBean {
     public static final String SOURCE_SCAN = "scan";
     public static final String SOURCE_LINK = "link";
+    public static final String SOURCE_COMMAND = "command";
+    public static final String SOURCE_ORDER = "order";
+
     private String uid;
     private Long appId;
-    /**
-     * @deprecated 请使用appId，appKey将在后续版本删除
-     */
-    private String appKey;
     private String appName;
     private String userName;
     private String userHeadImg;
@@ -29,14 +28,6 @@ public class AppSubscribeBean {
 
     public void setUid(String uid) {
         this.uid = uid;
-    }
-
-    public String getAppKey() {
-        return appKey;
-    }
-
-    public void setAppKey(String appKey) {
-        this.appKey = appKey;
     }
 
     public String getAppName() {

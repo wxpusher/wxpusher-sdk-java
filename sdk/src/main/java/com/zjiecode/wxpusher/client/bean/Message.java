@@ -39,17 +39,8 @@ public class Message {
 
     private String summary;
 
-    /**
-     * 是否验证付费
-     * @deprecated 请使用verifyPayType
-     */
-    private Boolean verifyPay;
-
     private Integer verifyPayType;
 
-    /**
-     * 仅针对text消息类型有效
-     */
     private String url;
 
     public String getAppToken() {
@@ -119,14 +110,6 @@ public class Message {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public void setVerifyPay(Boolean verifyPay) {
-        this.verifyPay = verifyPay;
-    }
-
-    public Boolean isVerifyPay() {
-        return verifyPay;
     }
 
     public void setVerifyPayType(Integer verifyPayType) {

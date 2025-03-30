@@ -11,7 +11,6 @@ public class UpCommandBean {
     private String appKey;
     private String appName;
     private String userName;
-    private String userHeadImg;
     private Long time;
     //消息内容
     private String content;
@@ -54,14 +53,6 @@ public class UpCommandBean {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserHeadImg() {
-        return userHeadImg;
-    }
-
-    public void setUserHeadImg(String userHeadImg) {
-        this.userHeadImg = userHeadImg;
     }
 
     public Long getTime() {
