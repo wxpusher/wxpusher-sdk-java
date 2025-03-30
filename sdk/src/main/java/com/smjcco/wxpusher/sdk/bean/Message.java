@@ -99,6 +99,7 @@ public class Message {
 
     /**
      * 只需要 body 标签内部的内容。
+     * @param content 内容
      */
     public void setContent(String content) {
         this.content = content;

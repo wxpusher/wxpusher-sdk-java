@@ -12,8 +12,8 @@ public class MessageResult {
     private Long messageId;
 
     /**
-     * 消息是否发送成功
-     * @return
+     * 请求服务端是否成功，这个判断成功 以后，再判断业务状态
+     * @return 结果
      */
     public boolean isSuccess() {
         return code == ResultCode.SUCCESS.getCode();

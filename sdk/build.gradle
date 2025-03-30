@@ -4,22 +4,34 @@ plugins {
 }
 
 
-
 //还有很多开发者用1.8，编译成低版本的，方便兼容
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+tasks.register('sourcesJar', Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+tasks.register('javadocJar', Jar) {
+    archiveClassifier = 'javadoc'
+    dependsOn javadoc
+    from javadoc.destinationDir
+}
 publishing {
+
     publications {
         mavenJava(MavenPublication) {
             from components.java  // 发布 Java 组件（自动包含 JAR 包和 POM 文件）
-            // 可选：自定义 artifactId（默认使用模块名）
+            artifact sourcesJar
+            artifact javadocJar
+
             artifactId = 'wxpusher'
             group = 'com.smjcco.wxpusher'
-            version = '1.0.0'
-            description ='微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，详情请看：http://wxpusher.zjiecode.com/docs'
+            version = '3.0.0'
+            description = '微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，详情请看：http://wxpusher.zjiecode.com/docs'
         }
     }
 

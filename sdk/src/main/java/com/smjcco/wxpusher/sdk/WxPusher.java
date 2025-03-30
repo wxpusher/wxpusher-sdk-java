@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 说明：WxPusher的客户端<br/>
- * 一般通过调用 initDefaultWxPusher()，初始化以后，然后就直接用getDefaultWxPusher()即可<br/>
- * 如果有多实例需求，可以用构造方法，多次实例化<br/>
- * 具体接口使用可以参考<a href="https://wxpusher.zjiecode.com/docs/#/">接口说明文档</a> <br/>
- * 作者：zjiecode <br/>
- * 时间：2019-05-03 <br/>
+ * 说明：WxPusher的客户端
+ * 一般通过调用 initDefaultWxPusher()，初始化以后，然后就直接用getDefaultWxPusher()即可
+ * 如果有多实例需求，可以用构造方法，多次实例化
+ * 具体接口使用可以参考<a href="https://wxpusher.zjiecode.com/docs/#/">接口说明文档</a> 
+ * 作者：zjiecode 
+ * 时间：2019-05-03 
  */
 public final class WxPusher {
 
@@ -31,7 +31,7 @@ public final class WxPusher {
     }
 
     /**
-     * 初始化WxPusher的默认实力<br/>
+     * 初始化WxPusher的默认实力
      *
      * @param appToken 获取到的AppToken，获取方式<a href="https://wxpusher.zjiecode.com/docs/#/?id=%e8%8e%b7%e5%8f%96apptoken">AppToken</a>
      */
@@ -45,6 +45,8 @@ public final class WxPusher {
 
     /**
      * 发送消息
+     * @param message 发送消息的内容
+     * @return 发送结果，如果传递了多个uid或者topic，会返回多个结果
      */
     public Result<List<MessageResult>> send(Message message) {
         Result<List<MessageResult>> result = verify(message);
@@ -58,7 +60,8 @@ public final class WxPusher {
 
     /**
      * 查询消息发送状态
-     *
+     * @param messageId  发送接口返回的的messageId
+     * @return 返回查询的状态
      * @deprecated 此接口返回数据可能不准确，只能确保wxpusher已经将消息推送到微信服务器了，用户可能拒绝接收
      */
     public Result<Integer> queryMessageStatus(Long messageId) {
@@ -88,6 +91,8 @@ public final class WxPusher {
 
     /**
      * 创建带参数的app临时二维码
+     * @param createQrcodeReq 创建二维码参数
+     * @return 返回创建的二维码
      */
     public Result<CreateQrcodeResp> createAppTempQrcode(CreateQrcodeReq createQrcodeReq) {
         createQrcodeReq.setAppToken(appToken);
@@ -106,6 +111,7 @@ public final class WxPusher {
      * @param uid      用户的uid，可选，如果不传就是查询所有用户，传uid就是查某个用户的信息。
      * @param isBlock  查询拉黑用户，可选，不传查询所有用户，true查询拉黑用户，false查询没有拉黑的用户
      * @param type     关注的类型，可选，不传查询所有用户，0是应用，1是主题
+     * @return 返回查询到的用户分页数据
      */
     public Result<Page<WxUser>> queryWxUserV2(String appToken, Integer page, Integer pageSize,
                                               String uid, boolean isBlock, UserType type) {
@@ -156,9 +162,9 @@ public final class WxPusher {
     }
 
     /**
-     * 删除用户<br/>
-     * 你可以通过本接口，删除用户对应用，主题的关注。<br/>
-     * 说明：你可以删除用户对应用、主题的关注，删除以后，用户可以重新关注，如不想让用户再次关注，可以调用拉黑接口，对用户拉黑。<br/>
+     * 删除用户
+     * 你可以通过本接口，删除用户对应用，主题的关注。
+     * 说明：你可以删除用户对应用、主题的关注，删除以后，用户可以重新关注，如不想让用户再次关注，可以调用拉黑接口，对用户拉黑。
      *
      * @param id 用户id，通过用户查询接口可以获取
      * @return 操作是否成功
@@ -183,7 +189,7 @@ public final class WxPusher {
      *
      * @param id     通过用户查询接口可以获取
      * @param reject 是否拉黑，true表示拉黑，false表示取消拉黑
-     * @return
+     * @return 操作结果
      */
     public Result<Boolean> rejectUser(Long id, Boolean reject) {
         if (id == null || id <= 0) {
