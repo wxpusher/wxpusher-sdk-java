@@ -1,3 +1,4 @@
+group = 'com.smjcco.wxpusher'
 
 buildscript {
     repositories {
@@ -7,6 +8,13 @@ buildscript {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.7.18"
     }
 }
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
 tasks.register('clean', Delete) {
     delete new File(getRootDir(), "out")
     delete new File(getRootDir(), "build")

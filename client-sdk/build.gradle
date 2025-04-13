@@ -1,0 +1,51 @@
+plugins {
+    id 'java-library'  //  Java 项目
+    id 'maven-publish' // 应用发布插件
+    id 'signing' // 用于生成 .asc 文件
+    id("org.danilopianini.publish-on-central") version "8.0.6"
+}
+
+
+//还有很多开发者用1.8，编译成低版本的，方便兼容
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+group = 'com.smjcco.wxpusher'
+
+publishOnCentral {
+    version = '3.0.0'
+    repoOwner.set("wxpusher")
+    projectDescription.set("WxPusher消息推送平台 是一个使用微信公众号作为通道的，实时信息推送平台，你可以通过调用API的方式，把信息推送到微信上，无需安装额外的软件，即可做到信息实时通知。 你可以使用WxPusher来做服务器报警通知、抢课通知、抢票通知，信息更新提示等。")
+    projectLongName.set("WxPusher消息推送平台 Java SDK")
+    licenseName.set("Apache License, Version 2.0")
+    licenseUrl.set("http://www.apache.org/licenses/LICENSE-2.0")
+    projectUrl.set("https://github.com/wxpusher/wxpusher-sdk-java")
+    scmConnection.set("git@github.com:wxpusher/wxpusher-sdk-java.git")
+}
+
+publishing {
+    publications {
+        OSSRH(MavenPublication) {
+            pom {
+                developers {
+                    developer {
+                        id = 'zjiecode'
+                        name = 'zjiecode'
+                        email = 'zjiecode@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.OSSRH
+}
+dependencies {
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.56'
+    testImplementation 'junit:junit:4.13.1'
+}

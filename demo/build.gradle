@@ -25,6 +25,6 @@ dependencies {
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.56'
 
     //实际开发中，请直接通过jar包依赖，在本demo中，直接工程依赖的sdk源码
-    implementation project(":sdk")
+    implementation project(":client-sdk")
 
 }
