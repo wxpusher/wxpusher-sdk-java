@@ -1,2 +1,1 @@
-
-./gradlew sdk:clean sdk:build sdk:bintrayUpload  -PbintrayApiKey=$BINTRAY_API_KEY
+./gradlew sdk:clean :sdk:publishToMavenLocal -Psigning.gnupg.passphrase=
