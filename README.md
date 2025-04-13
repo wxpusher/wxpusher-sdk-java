@@ -58,9 +58,8 @@ WxPusher会提供一些用户事件，比如用户关注、用户上行消息等
 ## 功能说明
 具体每个功能的说明，请参考<a href="https://wxpusher.zjiecode.com/docs/#/?id=http%e6%8e%a5%e5%8f%a3%e8%af%b4%e6%98%8e">API说明文档</a>，这里不再赘述。
 
-<h2>
-不想看文档，可以直接参考[单元测试的用法  client-sdk/src/test/java/com/smjcco/wxpusher/client/sdk/ClientTest.java](https://github.com/wxpusher/wxpusher-sdk-java/blob/master/client-sdk/src/test/java/com/smjcco/wxpusher/client/sdk/ClientTest.java)
-</h2>
+不想看文档，可以直接参考[单元测试的用法(client-sdk/src/test/java/com/smjcco/wxpusher/client/sdk/ClientTest.java)](https://github.com/wxpusher/wxpusher-sdk-java/blob/master/client-sdk/src/test/java/com/smjcco/wxpusher/client/sdk/ClientTest.java)
+
 
 
 ### 初始化
