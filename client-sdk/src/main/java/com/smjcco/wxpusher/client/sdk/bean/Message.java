@@ -49,6 +49,8 @@ public class Message {
 
     /**
      * 不需要外部设置，后面会删除这个字段
+     * @param appToken 应用token
+     * @deprecated  不要使用，内部接口依赖，后面会删除。
      */
     public void setAppToken(String appToken) {
         this.appToken = appToken;
