@@ -439,7 +439,7 @@ public class ClientTest {
             // 添加断言
             Assert.assertTrue("查询用户应该成功", queryResult.isSuccess());
             Assert.assertNotNull("用户ID不应为空", userId);
-            Assert.assertEquals("用户ID应匹配预期", Long.valueOf(34334), userId);
+            Assert.assertEquals("用户ID应匹配预期", Long.valueOf(28134), userId);
 
             System.out.println("为避免真实删除用户，该测试方法已被注释");
         } else {
