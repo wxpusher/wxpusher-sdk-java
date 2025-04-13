@@ -1,1 +1,0 @@
-./gradlew sdk:clean :sdk:publishToMavenLocal -Psigning.gnupg.passphrase=
