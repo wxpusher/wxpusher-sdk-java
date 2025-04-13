@@ -12,9 +12,9 @@ import java.util.Map;
  * 说明：WxPusher的客户端
  * 一般通过调用 initDefaultWxPusher()，初始化以后，然后就直接用getDefaultWxPusher()即可
  * 如果有多实例需求，可以用构造方法，多次实例化
- * 具体接口使用可以参考<a href="https://wxpusher.zjiecode.com/docs/#/">接口说明文档</a> 
- * 作者：zjiecode 
- * 时间：2019-05-03 
+ * 具体接口使用可以参考<a href="https://wxpusher.zjiecode.com/docs/#/">接口说明文档</a>
+ * 作者：zjiecode
+ * 时间：2019-05-03
  */
 public final class WxPusher {
 
@@ -40,15 +40,20 @@ public final class WxPusher {
     }
 
     public static WxPusher getDefaultWxPusher() {
+        if (defaultWxPusher == null) {
+            throw new RuntimeException("使用默认的实例前，请先调用initDefaultWxPusher进行初始化");
+        }
         return defaultWxPusher;
     }
 
     /**
      * 发送消息
+     *
      * @param message 发送消息的内容
      * @return 发送结果，如果传递了多个uid或者topic，会返回多个结果
      */
     public Result<List<MessageResult>> send(Message message) {
+        message.setAppToken(appToken);
         Result<List<MessageResult>> result = verify(message);
         if (result != null) {
             return result;
@@ -60,7 +65,8 @@ public final class WxPusher {
 
     /**
      * 查询消息发送状态
-     * @param messageId  发送接口返回的的messageId
+     *
+     * @param messageId 发送接口返回的的messageId
      * @return 返回查询的状态
      * @deprecated 此接口返回数据可能不准确，只能确保wxpusher已经将消息推送到微信服务器了，用户可能拒绝接收
      */
@@ -91,6 +97,7 @@ public final class WxPusher {
 
     /**
      * 创建带参数的app临时二维码
+     *
      * @param createQrcodeReq 创建二维码参数
      * @return 返回创建的二维码
      */
@@ -105,7 +112,6 @@ public final class WxPusher {
      * <a href="https://wxpusher.zjiecode.com/docs/#/?id=user-list">查询用户信息</a>
      * </p>
      *
-     * @param appToken 应用密钥标志
      * @param page     请求数据的页码
      * @param pageSize 分页大小，不能超过100
      * @param uid      用户的uid，可选，如果不传就是查询所有用户，传uid就是查某个用户的信息。
@@ -113,7 +119,7 @@ public final class WxPusher {
      * @param type     关注的类型，可选，不传查询所有用户，0是应用，1是主题
      * @return 返回查询到的用户分页数据
      */
-    public Result<Page<WxUser>> queryWxUserV2(String appToken, Integer page, Integer pageSize,
+    public Result<Page<WxUser>> queryWxUserV2(Integer page, Integer pageSize,
                                               String uid, boolean isBlock, UserType type) {
         if (appToken == null || appToken.isEmpty()) {
             return new Result<>(ResultCode.BIZ_FAIL, "appToken不能为空");

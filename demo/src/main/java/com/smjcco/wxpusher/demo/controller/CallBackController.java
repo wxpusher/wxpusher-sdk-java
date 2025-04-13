@@ -43,7 +43,6 @@ public class CallBackController {
                 message.setContent("扫描成功，你可以使用demo演示程序发送消息");
                 message.setContentType(Message.CONTENT_TYPE_TEXT);
                 message.setUid(appSubscribeBean.getUid());
-                message.setAppToken(appToken);
                 WxPusher.getDefaultWxPusher().send(message);
             } else {
                 //无参数二维码（默认二维码），不需要发送提醒，会自动发送后台设置的

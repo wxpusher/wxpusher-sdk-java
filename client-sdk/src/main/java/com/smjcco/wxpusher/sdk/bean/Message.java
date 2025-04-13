@@ -47,6 +47,9 @@ public class Message {
         return appToken;
     }
 
+    /**
+     * 不需要外部设置，后面会删除这个字段
+     */
     public void setAppToken(String appToken) {
         this.appToken = appToken;
     }
