@@ -2,7 +2,6 @@ package com.smjcco.wxpusher.client.sdk.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smjcco.wxpusher.client.sdk.demo.result.*;
-import com.smjcco.wxpusher.demo.result.*;
 
 import com.smjcco.wxpusher.client.sdk.demo.utils.ThrowableUtils;
 import org.springframework.context.annotation.Configuration;
@@ -79,11 +78,11 @@ public class AppWebMvcConfigurer implements WebMvcConfigurer {
                 result = new Result(ResultCode.INTERNAL_SERVER_ERROR, "服务器错误:" + throwable.getMessage());
                 responseResult(response, result);
                 log.error(result.toString(), throwable);
-            }else if (throwable instanceof HttpException){
+            } else if (throwable instanceof HttpException) {
                 //返回原始的http status code
                 result = new Result(ResultCode.INTERNAL_SERVER_ERROR, "服务器错误:" + throwable.getMessage());
-                responseResult(response, result,((HttpException) throwable).getHttpStatus());
-            }  else {
+                responseResult(response, result, ((HttpException) throwable).getHttpStatus());
+            } else {
                 //其他错误
                 String message = String.format("接口 [%s] 出现异常", request.getRequestURI());
                 result = new Result(ResultCode.INTERNAL_SERVER_ERROR, message);
@@ -106,12 +105,13 @@ public class AppWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     private void responseResult(HttpServletResponse response, Result result) {
-        responseResult(response, result,200);
+        responseResult(response, result, 200);
     }
-        /**
-         * 遇到错误，拦截以后输出响应到客户端
-         */
-    private void responseResult(HttpServletResponse response, Result result,int httpCode) {
+
+    /**
+     * 遇到错误，拦截以后输出响应到客户端
+     */
+    private void responseResult(HttpServletResponse response, Result result, int httpCode) {
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-type", "application/json;charset=UTF-8");
         response.setHeader("Access-Control-Allow-Credentials", "true");
